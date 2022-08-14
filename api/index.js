@@ -5,20 +5,32 @@ const http = require('http');
 const hostname = 'localhost';
 const port = 3030;
 
+const KEY_WORDS = ['шутку, анекдот']
+
 const server = http.createServer((req, res) => {
+    let command = ''
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    // aneks['messages'][Math.round(Math.random() * 100)]['text']
+    const randomAnek = aneks['messages'][Math.round(Math.random() * 100)]['text']
+    req.on('data', chunk => {
+        const reqBody = JSON.parse(chunk)
+        command = reqBody['request']['command']
 
+    });
 
-    res.write(JSON.stringify({
-        "response": {
+    Promise.resolve()
+        .then(() => {
+            res.write(JSON.stringify({
+                "response": {
 
-            "text": aneks['messages'][Math.round(Math.random() * 100)]['text'],
-            "tts": aneks['messages'][Math.round(Math.random() * 100)]['text']
-        },
-        "version": "1.0"
-    }))
-    res.end()
+                    "text": randomAnek,
+                    "tts": randomAnek
+                },
+                "version": "1.0"
+            }))
+        }).then(() => {
+            res.end()
+        })
+
 });
 
 server.listen(port, hostname, () => {
