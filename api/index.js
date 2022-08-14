@@ -26,9 +26,9 @@
 export default function handler(req, res) {
 
     // Из запроса извлекаются свойства request, session и version.
-    const { request, session, version } = await json(req);
+    // const { request, session, version } = await json(req);
 
-    res.status(200).send(`Hello ${request.original_utterance}!`);
+    res.status(200).send(`Hello!`);
 
     // console.log(request.original_utterance);
 
