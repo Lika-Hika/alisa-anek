@@ -20,10 +20,10 @@
 // https.createServer(options, app).listen(3000);
 
 // Для асинхронной работы используется пакет micro.
-const { json } = require('micro');
+// const { json } = require('micro');
 
 // Запуск асинхронного сервиса.
-module.exports = async (req, res) => {
+export default function handler(req, res) {
 
     // Из запроса извлекаются свойства request, session и version.
     const { request, session, version } = await json(req);
@@ -50,4 +50,4 @@ module.exports = async (req, res) => {
     //         },
     //     }
     // ));
-};
+}
